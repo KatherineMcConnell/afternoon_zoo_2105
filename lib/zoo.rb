@@ -34,7 +34,7 @@ class Zoo
         older_animals << animal
       end
     end
-      older_animals
+    older_animals
   end
 
   def total_weight_of_animals
@@ -48,4 +48,18 @@ class Zoo
     details_h["total_weight"] = total_weight_of_animals
     details_h["street_address"] = @street
   end
+
+  def animals_sorted_by_weight
+    @inventory.sort_by {|animal| animal.weight.age_to_integer}
+  end
+
+  def animal_hash
+    animal_hash = Hash.new{|hash,key| hash[key] = []}
+    @inventory.each do |animal|
+      animal_hash[animal.kind.first] << animal
+    end
+    animal_hash
+  end
+
+
 end

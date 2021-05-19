@@ -9,6 +9,7 @@ RSpec.describe Zoo do
     @animal_2 = Animal.new("Red Panda", 5, 70)
     @animal_3 = Animal.new("Capybara", 100, 150)
     @animal_4 = Animal.new("Dolphin", 150, 200)
+    @animal_5 = Animal.new("Dog", 65, 200)
   end
 
   it 'exists' do
@@ -77,5 +78,29 @@ RSpec.describe Zoo do
 
     expect(@zoo.details).to eq({"total_weight" => 265,
                                 "street_address" => "2300 Southern Blvd"})
+  end
+
+  it 'can sort animals by weight' do
+    @zoo.add_animal(@animal_1)
+    @zoo.add_animal(@animal_2)
+    @zoo.add_animal(@animal_3)
+    @zoo.add_animal(@animal_4)
+
+    sorted = [@animal_4,@animal_3,@animal_2,@animal_1]
+    expect(@zoo.animals_sorted_by_weight).to eq(sorted)
+  end
+
+  it 'it can create keys from first letter of animal names' do
+    @zoo.add_animal(@animal_1)
+    @zoo.add_animal(@animal_2)
+    @zoo.add_animal(@animal_3)
+    @zoo.add_animal(@animal_4)
+    @zoo.add_animal(@animal_5)
+
+    result = {"C" => [@animal_3],
+              "D" => [@animal_4,@animal_5],
+              "R" => [@animal_2],
+              "S" => [@animal_1]}
+    expect(@zoo.animal_hash).to eq(result)
   end
 end
