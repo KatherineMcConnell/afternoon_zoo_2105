@@ -30,9 +30,10 @@ class Zoo
   def animals_older_than(older_than)
       older_animals = []
       @inventory.each do |animal|
-        @animal.age_to_integer > older_than
+        if animal.age_to_integer > older_than
         older_animals << animal
       end
+    end
       older_animals
   end
 
