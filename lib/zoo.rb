@@ -16,7 +16,7 @@ class Zoo
   end
 
   def address
-    @street + " " + @city + ", " + @state + " " + @zip_code
+    "#{@street} #{@city}, #{@state} #{zip_code}"
   end
 
   def add_animal(animal)
@@ -27,26 +27,22 @@ class Zoo
     @inventory.length
   end
 
-  def animals_older_than(older_than)
-    @inventory.find_all { |animal| animal.age_to_integer > older_than}
+  def animals_older_than(age)
+    @inventory.find_all { |animal| (animal.age_in_days/7) > age}
   end
 
   def total_weight_of_animals
     @inventory.sum do |animal|
-      animal.weight_to_integer
+      animal.weight.split.first.to_i
     end
   end
 
   def details
-    details_h = {}
-    details_h["total_weight"] = total_weight_of_animals
-    details_h["street_address"] = @street
-    details_h
+    {"total_weight"=> total_weight_of_animals, "street_address"=> @street}
   end
 
   def animals_sorted_by_weight
-    sorted = @inventory.sort_by {|animal| animal.weight_to_integer}
-    sorted.reverse
+    @inventory.sort_by {|animal| animal.weight.split.first.to_i}.reverse
   end
 
   def animal_hash

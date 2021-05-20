@@ -1,28 +1,25 @@
 class Animal
-  attr_reader :kind,
-              :weight,
-              :age
-
+  attr_reader :kind
   def initialize(kind, weight, age)
     @kind = kind
-    @weight = weight.to_s + " " + "pounds"
-    @age = age.to_s + " " + "weeks"
+    @weight = weight
+    @age = age
   end
 
-  def age_to_integer
-    age.delete("weeks").to_i
+  def weight
+    "#{@weight} pounds"
+  end
+
+
+  def age
+    "#{@age} weeks"
   end
 
   def age_in_days
-    age_to_integer * 7
+    @age * 7
   end
 
-  def weight_to_integer
-    @weight.delete("pounds").to_i
-  end
-
-  def feed!(pound)
-    new_weight = weight_to_integer + pound
-    @weight = new_weight.to_s + " " + "pounds"
+  def feed!(pounds_of_food)
+  @weight += pounds_of_food
   end
 end
